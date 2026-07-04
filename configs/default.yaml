@@ -1,0 +1,93 @@
+# ==========================================
+# TinyGPT Configuration
+# ==========================================
+
+project:
+  # Name of the project.
+  name: TinyGPT
+
+  # Configuration version.
+  version: 2.0
+
+
+hardware:
+  # Device to use for training.
+  # Options:
+  #   auto - Automatically select GPU if available, otherwise CPU.
+  #   cpu  - Force CPU execution.
+  #   cuda - Force NVIDIA GPU.
+  device: auto
+
+
+dataset:
+  # Training dataset file.
+  train_file: datasets/train.txt
+
+  # Validation dataset file.
+  validation_file: datasets/val.txt
+
+
+tokenizer:
+  # Tokenization strategy.
+  # Examples:
+  #   word      - Split text into words.
+  #   character - Split text into individual characters.
+  type: word
+
+  # Size of the tokenizer vocabulary.
+  # Set to null to build the vocabulary automatically
+  # from the training dataset.
+  vocabulary_size: null
+
+
+model:
+  # Maximum number of previous tokens the model
+  # can attend to while predicting the next token.
+  context_length: 64
+
+  # Size of each token embedding and hidden representation.
+  # Larger values generally improve model capacity but
+  # require more memory and computation.
+  embedding_dimension: 128
+
+  # Number of attention heads in each Transformer block.
+  # embedding_dimension should be divisible by this value.
+  number_of_heads: 4
+
+  # Number of Transformer blocks (layers).
+  # More layers increase model capacity.
+  number_of_layers: 4
+
+  # Dropout probability used during training to reduce overfitting.
+  dropout: 0.1
+
+
+training:
+  # Number of training samples processed in one iteration.
+  batch_size: 32
+
+  # Total number of passes through the training dataset.
+  # epochs: 20
+
+  # Overfitting for smaller model
+  epochs: 150
+
+  # Initial learning rate for the optimizer.
+  learning_rate: 0.0003
+
+  # Weight decay (L2 regularization) to help prevent overfitting.
+  weight_decay: 0.01
+
+
+logging:
+  # Directory where training logs are stored.
+  directory: logs
+
+
+checkpoint:
+  # Directory where model checkpoints are saved.
+  directory: checkpoints
+
+  # Save a checkpoint after every training epoch.
+  # Set to false to disable automatic checkpointing.
+  save_every_epoch: true
