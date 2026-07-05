@@ -64,7 +64,7 @@ Current limitations include:
 - Inference script
 - Model generation
 
-### How it is diffrent from TinyLLM
+### How it is diffrent from [TinyLLM](https://github.com/expert-gk/TinyLLM)
 
 | TinyLLM            | TinyGPT                                           |
 | ------------------ | ------------------------------------------------- |
@@ -82,7 +82,7 @@ Current limitations include:
 
 ## How to run this project
 
-First check python version
+First check python version. It should be 3.11 or later
 ```
 python --version
 ```
@@ -354,3 +354,40 @@ TinyGPT v1.0 follows a modular architecture where each component has a single re
 * **Utilities** provide common functionality shared across the project.
 
 This structure keeps the project easy to understand, test, maintain, and extend while remaining focused on learning how GPT models work internally.
+
+## Test Description
+
+The project includes a collection of unit tests to verify that each major component of TinyGPT works correctly. These tests are designed to validate individual modules before running the complete training pipeline.
+
+| Test File                   | Purpose                                                                                                              |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `test_config.py`            | Verifies that the YAML configuration is loaded correctly and all configuration values are available.                 |
+| `test_device.py`            | Checks device detection and ensures the project can run on both CPU and CUDA-enabled GPUs.                           |
+| `test_tokenizer.py`         | Validates tokenizer training, vocabulary creation, encoding, and decoding operations.                                |
+| `test_dataset.py`           | Ensures the language dataset correctly creates input and target token sequences using the configured context length. |
+| `test_embedding.py`         | Verifies the token embedding and positional embedding layers produce tensors with the expected dimensions.           |
+| `test_attention.py`         | Tests the Multi-Head Self-Attention implementation, including tensor shapes and causal masking.                      |
+| `test_transformer_block.py` | Confirms that a Transformer block processes the input correctly while preserving the expected output dimensions.     |
+| `test_gpt.py`               | Performs an end-to-end forward pass through the GPT model and verifies the output logits have the correct shape.     |
+
+### Running All Tests
+
+Run the complete test suite:
+
+```bash
+pytest
+```
+
+Run an individual test:
+
+```bash
+pytest tests/test_gpt.py
+```
+
+or
+
+```bash
+pytest tests/test_attention.py
+```
+
+All tests should pass before training the model to ensure each component functions correctly.
